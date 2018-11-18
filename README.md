@@ -64,7 +64,7 @@ Retrain model:
 python -m train.retrain   --bottleneck_dir=train_output/bottlenecks   --how_many_training_steps=500   --model_dir=train_output/models/   --summaries_dir=train_output/training_summaries/"${ARCHITECTURE}"   --output_graph=train_output/retrained_graph.pb   --output_labels=train_output/retrained_labels.txt   --architecture="${ARCHITECTURE}" --image_dir=augment-data/usa/farmer_market
 ```
 
-Predict label:
+Predict label (image on desktop):
 ```
 python -m train.label_image --graph=train_output/retrained_graph.pb --image=validation/usa/farmer_market/tomato/tomato-val-1.jpg
 ```
@@ -75,6 +75,12 @@ You can use one of the following methods to upload your fruit and vegetatble pic
 1. Create a Pull Request via Git
 2. Share your images with us (ai.for.mankind@gmail.com) via Google Photos. 
 3. Share your images via Instagram by using hashtag #FruitsVegChallenge and  #AI_<FRUIT_TYPE>, an AI prefix hashtag eg: #AI_carrot, #AI_cauliflower. Remember to tag aiformankind. [More infos about our Instagram #FruitsVegChallenge](https://www.instagram.com/p/Bp8vjuaADBi/) 
+
+Predict label (image on Internet):
+```
+python -m train.label_image --graph=train_output/retrained_graph.pb --image_url=http://cms.ipressroom.com.s3.amazonaws.com/173/files/20125/52e70b23f6091d782f000199_46578_broccoli3608/46578_broccoli3608_642fcb7e-27ab-4707-baa3-77c87c4d6d35-prv.jpg
+```
+
 
 #### Project Advisors:
 Jigar Doshi from CrowdAI, [@jigarkdoshi](https://twitter.com/jigarkdoshi)
