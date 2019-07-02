@@ -1,4 +1,5 @@
 # Use an official tensorflow and latest stable release
+
 FROM tensorflow/tensorflow
 
 # Define environment variable
