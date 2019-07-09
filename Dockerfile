@@ -7,6 +7,10 @@ ENV IMAGE_SIZE=224
 ENV ARCHITECTURE="mobilenet_0.50_${IMAGE_SIZE}"
 ENV WORKPATH /seeing-the-world
 ENV TF_CPP_MIN_LOG_LEVEL=2
+ARG NUM_SAMPLE
+ARG TRAING_STEPS
+ENV NUM_SAMPLE=$NUM_SAMPLE
+ENV TRAING_STEPS=$TRAING_STEPS
 
 # Set the working directory based on the WORKPATH
 WORKDIR $WORKPATH
@@ -27,4 +31,4 @@ RUN apt-get update \
   && pip install Augmentor
 
 # Run bash when the container launches
-ENTRYPOINT ["/bin/bash"]
+ENTRYPOINT ["bash", "entrypoint.sh"]
