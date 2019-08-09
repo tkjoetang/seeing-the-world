@@ -12,12 +12,6 @@ ARG TRAING_STEPS
 ENV NUM_SAMPLE=$NUM_SAMPLE
 ENV TRAING_STEPS=$TRAING_STEPS
 
-# Set the working directory based on the WORKPATH
-WORKDIR $WORKPATH
-
-# Copy the current directory contents into the container based on the WORKPATH
-COPY . $WORKPATH
-
 # Make port 8888 and 6006 available to the world outside this container
 EXPOSE 8888 6006
 
@@ -29,6 +23,9 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/* \
   && pip install --upgrade pip \
   && pip install Augmentor
+
+WORKDIR $WORKPATH
+COPY . $WORKPATH
 
 # Run bash when the container launches
 ENTRYPOINT ["bash", "entrypoint.sh"]
