@@ -5,7 +5,7 @@ IMAGES_NAME='aiformankind/seeingtheworld'
 
 is_images_exist=$(docker images -a | grep "$IMAGES_NAME")
 if [ ! -z is_images_exist ]; then
-  docker build -t $IMAGES_NAME:0.0.1 .
+  docker build -t $IMAGES_NAME:0.0.1 --build-arg TRAING_STEPS=1000 .
 fi
 
 is_container_exist=$(docker ps | grep "$CONTAINSER_NAME")
