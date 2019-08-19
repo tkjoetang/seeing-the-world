@@ -3,3 +3,8 @@ LICENSE
 *.ipynb
 .gitignore
 Dockerfile
+.git/
+
+data/
+train_output/
+augment-data/

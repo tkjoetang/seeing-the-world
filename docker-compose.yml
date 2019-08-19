@@ -1,0 +1,21 @@
+version: '3.7'
+
+services:
+  seeing-the-world:
+    build: .
+    image: aiformankind/seeingtheworld
+    ports:
+      - "8888:8888"
+      - "6006:6006"
+    volumes:
+      - ./data:/app/data
+      - augment-data:/app/augment-data
+      - train_output:/app/train_output
+    environment:
+      - TRAING_STEPS=1000
+      - NUM_SAMPLE=8000
+      - IMAGE_DIR=usa/farmer_market
+
+volumes:
+  augment-data:
+  train_output:
