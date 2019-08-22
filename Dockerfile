@@ -1,35 +1,20 @@
-# Use an official tensorflow and latest stable release
-
 FROM tensorflow/tensorflow
+LABEL org.label-schema.schema-version="1.0" \
+      org.label-schema.name="seeing-the-world" \
+      org.label-schema.vcs-url="https://github.com/aiformankind/seeing-the-world"
 
-# Define environment variable
-ENV IMAGE_SIZE=224
+ARG IMAGE_SIZE=224
 ENV ARCHITECTURE="mobilenet_0.50_${IMAGE_SIZE}"
-ENV WORKPATH /seeing-the-world
 ENV TF_CPP_MIN_LOG_LEVEL=2
-ARG NUM_SAMPLE
-ARG TRAING_STEPS
-ENV NUM_SAMPLE=$NUM_SAMPLE
-ENV TRAING_STEPS=$TRAING_STEPS
+ENV NUM_SAMPLE=8000
+ENV TRAING_STEPS=500
+ENV IMAGE_DIR="usa/farmer_market"
 
-# Set the working directory based on the WORKPATH
-WORKDIR $WORKPATH
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+COPY . .
 
-# Copy the current directory contents into the container based on the WORKPATH
-COPY . $WORKPATH
-
-# Make port 8888 and 6006 available to the world outside this container
 EXPOSE 8888 6006
-
-# Install any needed software and python packages
-RUN apt-get update \
-  && apt-get install -y \
-     wget \
-     vim  \
-  && rm -rf /var/lib/apt/lists/* \
-  && pip install --upgrade pip \
-  && pip install Augmentor
-
-
-# Run bash when the container launches
-ENTRYPOINT ["bash", "entrypoint.sh"]
+VOLUME ["/app/data", "/app/train_output", "/app/augment-data"]
+ENTRYPOINT ["bash", "entrypoint.sh", "augment_and_retain"]
